@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+table, th, td {
+  border: 2px solid yellow;font-size:120%;
+
+}
+  h1   {color: #800000;}
+
+</style>
+<div class="container" align="center">
+
+    <marquee><h1 style="font-size:60px;">Time Table</h1></marquee>
+    <br>
+    <h2>Update your TimeTable Sheet by Days!!! </h2>
+    <br>
+    <table border="3" cellspacing="3">
+        <thead>
+            <tr>
+
+                <th>Category</th>
+                <th>Question</th>
+                <th>Option A</th>
+                <th>Option B</th>
+                <th>Option C</th>
+                <th>Option D</th>
+                <th>Answer</th>
+
+
+
+
+
+            </tr>
+        </thead>
+        {% for Q in ques %}
+        <tr>
+
+
+            <td align="center" ><font color="#000080" ><b><u><a href="{{ q.id }}">{{Q.category}}</a></b></font></td>
+            <td align="center"><font color="brown"><b>{{Q.question}}</b></font></td>
+            <td align="center"><font color="green"><b>{{Q.optiona}}</b></font></td>
+            <td align="center"><font color="brown"><b>{{Q.optionb}}</b></font></td>
+             <td align="center"><font color="green"><b>{{Q.optionc}}</b></font></td>
+             <td align="center"><font color="RED"><b>{{Q.optiond}}</b></font></td>
+             <td align="center"><font color="brown"><b>{{Q.answer}}</b></font></td>
+
+
+
+
+
+        </tr>
+        {% endfor %}
+
+    </table>
+</div>
+<div class="container">
+
+   <br>
+    <br>
+
+
+     <a class='btn btn-info' href="{% url 'Portal:create' %}">Create Questions</a> </p>
+
+
+
+</div>
+{% endblock %}

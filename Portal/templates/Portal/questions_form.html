@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>
+  {% if not form.instance.pk %}
+    Create Question
+    {% else %}
+    Update Question
+    {% endif %}
+
+
+</h1>
+
+
+<form method="Post">
+
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" class="btn btn-primary" value="submit">
+
+</form>
+
+   {% endblock %}

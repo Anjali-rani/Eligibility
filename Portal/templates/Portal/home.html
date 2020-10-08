@@ -1,0 +1,19 @@
+{% extends "Portal/base.html" %}
+
+{% block title%}
+  Home
+{% endblock %}
+
+{% block content %}
+  <h1 class="center">Welcome </h1>
+  <h2>Select the category to begin with the quiz in that category</h2>
+  {% for choice in choices %}
+  <div class="row">
+    <div class="col-md-4">
+      <a href="/Portal/{{
+       }}"><h3>{{ choice.1 }}</h3></a>
+    </div>
+
+  </div>
+  {% endfor %}
+{% endblock %}

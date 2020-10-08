@@ -1,0 +1,114 @@
+<html>
+<head>
+
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<!--JavaScript code to add timer for quiz. Value is set to 30 mins. Can be changed from here -->
+<script type="text/javascript">
+
+window.onload = function begin(){
+document.getElementById('timer').innerHTML =
+  1 + ":" + 00;
+startTimer();
+}
+function startTimer() {
+  var presentTime = document.getElementById('timer').innerHTML;
+  var timeArray = presentTime.split(/[:]+/);
+  var m = timeArray[0];
+  var s = checkSecond((timeArray[1] - 1));
+  if(s==59){m=m-1}
+  if(m<0){
+    document.getElementById('quiz').submit();
+  }
+  document.getElementById('timer').innerHTML =
+    m + ":" + s;
+  setTimeout(startTimer, 1000);
+}
+
+function checkSecond(sec) {
+  if (sec < 10 && sec >= 0) {sec = "0" + sec}; // add zero in front of numbers < 10
+  if (sec < 0) {sec = "59"};
+  return sec;
+}
+
+
+        window.history.forward();
+        function noBack() {
+            window.history.forward();
+        }
+</script>
+  </head>
+<!--end -->
+<body>
+
+
+<div class='float-right sticky-top'>
+	<div class="row justify-content-left">
+		<div class="col-mx-auto">
+			<div class="alert alert-success" role="alert"><center><h6>Time left : <span id="timer"></h6></span></center></div>
+		</div>
+	</div>
+</div>
+<br>
+<br>
+
+<form action="./result" method="post" name="form" id="quiz">
+  {% for que in questions_obj %}
+ <div class='container'>
+
+
+
+                      <pre><h4>{{ forloop.counter }}. {{ que.question }}</h4></pre>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-4">
+      <h4>
+      <input type="radio" name="{{ que.id }}" value="{{ que.optiona }}">
+      {{ que.optiona }}
+    </h4>
+    </div>
+    <div class="col-md-3">
+      <h4>
+      <input type="radio" name="{{ que.id }}" value="{{ que.optionb }}">
+      {{ que.optionb }}
+    </h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-4">
+      <h4>
+      <input type="radio" name="{{ que.id }}" value="{{ que.optionc }}">
+      {{ que.optionc }}
+    </h4>
+    </div>
+    <div class="col-md-3">
+      <h4>
+      <input class="form_control" type="radio" name="{{ que.id }}" value="{{ que.optiond }}">
+      {{ que.optiond }}
+    </h4>
+    </div>
+  </div>
+  {% endfor %}
+          </h5></center></br>
+  {% csrf_token %}
+  <br>
+  <div class="row">
+    <div class="col-md-1">
+    </div>
+    <div class="col-xs-2">
+      <button type="submit" class="btn btn-block btn-success btn-md">Result</button>
+    </div>
+  </div>
+</form>
+</body>
+</html>
